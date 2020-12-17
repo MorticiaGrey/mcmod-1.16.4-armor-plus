@@ -6,18 +6,16 @@ import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(PlayerScreenHandler.class)
 public abstract class PlayerScreenHandlerMixin extends AbstractRecipeScreenHandler<CraftingInventory> {
+    // Redirects addSlot() and only makes a slot if it's not an armor slot
     @Redirect(at = @At(value  = "INVOKE", target = "net/minecraft/screen/PlayerScreenHandler.addSlot(Lnet/minecraft/screen/slot/Slot;)Lnet/minecraft/screen/slot/Slot;"), method = "<init>")
-    //@Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/PlayerScreenHandler;<init>(Lnet/minecraft/entity/player/PlayerInventory;ZLnet/minecraft/entity/player/PlayerEntity;)V"), method = "<init>")
     private Slot PlayerScreenHandler(PlayerScreenHandler playerScreenHandler, Slot slot) {
-        if (slot.x == 8 && slot.y >= 8) {
+        if (slot.x == 8 && slot.y >= 8 && slot.y <= 80) {
             return slot;
         } else {
             slot.id = this.slots.size();

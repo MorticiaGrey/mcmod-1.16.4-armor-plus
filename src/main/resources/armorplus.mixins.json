@@ -4,6 +4,7 @@
   "package": "com.Morticia.armorplus.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "playerui.InventoryScreenMixin",
     "playerui.PlayerScreenHandlerMixin"
   ],
   "client": [
