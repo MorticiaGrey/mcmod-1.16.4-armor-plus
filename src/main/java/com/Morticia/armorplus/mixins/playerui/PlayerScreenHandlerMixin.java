@@ -1,5 +1,8 @@
 package com.Morticia.armorplus.mixins.playerui;
 
+import com.Morticia.armorplus.misc.OffhandSlot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
@@ -8,7 +11,9 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerScreenHandler.class)
 public abstract class PlayerScreenHandlerMixin extends AbstractRecipeScreenHandler<CraftingInventory> {
@@ -22,6 +27,14 @@ public abstract class PlayerScreenHandlerMixin extends AbstractRecipeScreenHandl
             this.slots.add(slot);
             this.trackedStacks.add(ItemStack.EMPTY);
             return slot;
+        }
+    }
+
+    // Adds extra offhand slots
+    @Inject(at = @At(value = "RETURN"), method = "<init>")
+    private void addOffhandSlots(PlayerInventory inventory, boolean onServer, PlayerEntity owner, CallbackInfo ci) {
+        for(int y = 0; y < 4; ++y) {
+            this.addSlot(new OffhandSlot(inventory, 40 + y, 77, 62 - y * 18));
         }
     }
 
