@@ -39,8 +39,35 @@ public class OffhandSlot extends Slot {
         } else if (activeSlot < 0) {
             activeSlot = 0;
         } else {
-            activeSlot += 1;
+            activeSlot = getNextFullSlot(activeSlot);
         }
+    }
+
+    public static int getNextFullSlot(int current_slot) {
+        int slotAmount = offhandSlots.size();
+        boolean hasJumped = false;
+
+        // Checks if all slots are empty and returns if they are
+        if (!offhandSlots.get(0).hasStack() && !offhandSlots.get(1).hasStack() && !offhandSlots.get(2).hasStack() && !offhandSlots.get(3).hasStack()) {
+            return 0;
+        }
+
+        for (int i = current_slot; i <= slotAmount; ++i) {
+            if (i == 3 && !hasJumped) {
+                i = 0;
+                hasJumped = true;
+            }
+            if (i == 3) {
+                if (offhandSlots.get(0).hasStack()) {
+                    return 0;
+                }
+            }
+            if (offhandSlots.get(i + 1).hasStack()) {
+
+                return i + 1;
+            }
+        }
+        return current_slot;
     }
 
     public void setUsable(boolean usable) {
