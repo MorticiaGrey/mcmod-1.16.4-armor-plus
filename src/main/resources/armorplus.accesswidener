@@ -1,3 +1,8 @@
 accessWidener	v1	named
 
 accessible field net/minecraft/screen/ScreenHandler trackedStacks Lnet/minecraft/util/collection/DefaultedList;
+accessible field net/minecraft/screen/slot/Slot index I
+
+extendable class net/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeSlot
+
+accessible    method    net/minecraft/screen/ScreenHandler    addSlot    (Lnet/minecraft/screen/slot/Slot;)Lnet/minecraft/screen/slot/Slot;

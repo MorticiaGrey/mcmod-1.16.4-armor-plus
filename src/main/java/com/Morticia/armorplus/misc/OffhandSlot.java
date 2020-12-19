@@ -28,6 +28,14 @@ public class OffhandSlot extends Slot {
         isUsable = offhandSlots.size() == 1;
     }
 
+    public OffhandSlot(Slot slot) {
+        super(slot.inventory, slot.index, slot.x, slot.y);
+        // Adds to registry
+        offhandSlots.add(this);
+        // Only active by default if it's the first slot, otherwise needs to be set usable
+        isUsable = offhandSlots.size() == 1;
+    }
+
     @Environment(EnvType.CLIENT)
     public Pair<Identifier, Identifier> getBackgroundSprite() {
         return Pair.of(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, PlayerScreenHandler.EMPTY_OFFHAND_ARMOR_SLOT);

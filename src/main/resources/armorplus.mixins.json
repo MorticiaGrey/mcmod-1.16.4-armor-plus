@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "PlayerEntityMixin",
+    "playerui.CreativeInventoryScreenMixin",
+    "playerui.InventoryScreenMixin",
     "playerui.PlayerInventoryMixin",
     "playerui.PlayerScreenHandlerMixin"
   ],

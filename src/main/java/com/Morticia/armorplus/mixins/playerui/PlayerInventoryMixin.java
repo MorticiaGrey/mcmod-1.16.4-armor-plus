@@ -14,4 +14,9 @@ public abstract class PlayerInventoryMixin {
     @Final
     @Mutable
     public final DefaultedList<ItemStack> offHand = DefaultedList.ofSize(4, ItemStack.EMPTY);
+
+    @Shadow
+    @Final
+    @Mutable
+    public final DefaultedList<ItemStack> main = DefaultedList.ofSize(38, ItemStack.EMPTY);
 }

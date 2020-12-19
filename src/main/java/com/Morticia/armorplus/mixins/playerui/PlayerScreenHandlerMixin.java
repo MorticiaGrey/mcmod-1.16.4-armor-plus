@@ -1,10 +1,11 @@
 package com.Morticia.armorplus.mixins.playerui;
 
+import com.Morticia.armorplus.GUI.GearSlot;
+import com.Morticia.armorplus.item.GearType;
 import com.Morticia.armorplus.misc.OffhandSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
@@ -16,18 +17,20 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerScreenHandler.class)
-public abstract class PlayerScreenHandlerMixin extends AbstractRecipeScreenHandler<CraftingInventory> {
+public abstract class  PlayerScreenHandlerMixin extends AbstractRecipeScreenHandler<CraftingInventory> {
     // Redirects addSlot() and only makes a slot if it's not an armor slot
-    @Redirect(at = @At(value  = "INVOKE", target = "net/minecraft/screen/PlayerScreenHandler.addSlot(Lnet/minecraft/screen/slot/Slot;)Lnet/minecraft/screen/slot/Slot;"), method = "<init>")
-    private Slot PlayerScreenHandler(PlayerScreenHandler playerScreenHandler, Slot slot) {
-        if (slot.x == 8 && slot.y >= 8 && slot.y <= 80) {
-            return slot;
-        } else {
-            slot.id = this.slots.size();
-            this.slots.add(slot);
-            this.trackedStacks.add(ItemStack.EMPTY);
-            return slot;
-        }
+    @Redirect(at = @At(value  = "INVOKE", target = "net/minecraft/screen/PlayerScreenHandler.addSlot(Lnet/minecraft/screen/slot/Slot;)Lnet/minecraft/screen/slot/Slot;", ordinal = 2), method = "<init>")
+    private Slot addSlotRedirect1(PlayerScreenHandler playerScreenHandler, Slot slot) {
+        /* This was criminally stupid for what I was doing with it but I might use this code later on
+        Slot newSlot = new Slot(slot.inventory, slot.index, slot.x, slot.y);
+
+        newSlot.id = this.slots.size();
+        this.slots.add(newSlot);
+        this.trackedStacks.add(ItemStack.EMPTY);
+
+        return newSlot;
+         */
+        return slot;
     }
 
     // Adds extra offhand slots
@@ -36,6 +39,8 @@ public abstract class PlayerScreenHandlerMixin extends AbstractRecipeScreenHandl
         for(int y = 0; y < 4; ++y) {
             this.addSlot(new OffhandSlot(inventory, 40 + y, 77, 62 - y * 18));
         }
+
+        this.addSlot(new GearSlot(inventory, 46, this.x - 8, owner.playerScreenHandler, GearType.CAWL));
     }
 
     private PlayerScreenHandlerMixin(ScreenHandlerType<?> screenHandlerType, int i) {
