@@ -1,5 +1,6 @@
 package com.Morticia.armorplus.mixins.playerui;
 
+import com.Morticia.armorplus.GUI.GUICoords;
 import com.Morticia.armorplus.GUI.GearSlot;
 import com.Morticia.armorplus.item.GearType;
 import com.Morticia.armorplus.misc.OffhandSlot;
@@ -40,7 +41,7 @@ public abstract class  PlayerScreenHandlerMixin extends AbstractRecipeScreenHand
             this.addSlot(new OffhandSlot(inventory, 40 + y, 77, 62 - y * 18));
         }
 
-        this.addSlot(new GearSlot(inventory, 46, this.x - 8, owner.playerScreenHandler, GearType.CAWL));
+        this.addSlot(new GearSlot(inventory, 46, GUICoords.invX - 69, GUICoords.invY + 7, GearType.CAWL));
     }
 
     private PlayerScreenHandlerMixin(ScreenHandlerType<?> screenHandlerType, int i) {
