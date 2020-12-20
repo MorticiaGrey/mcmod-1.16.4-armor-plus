@@ -1,0 +1,3 @@
+Game doesn't start because of PlayerInventoryMixin#renderInject
+Previously Player inventory background would render on top of new ui, making it dark (bug I was trying to fix when introduced previous bug)
+Code is very messy and has no comments
