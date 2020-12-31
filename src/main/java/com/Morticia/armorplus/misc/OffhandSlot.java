@@ -1,6 +1,5 @@
 package com.Morticia.armorplus.misc;
 
-import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -84,5 +83,9 @@ public class OffhandSlot extends Slot {
 
     public boolean toggleUsable() {
         return isUsable = !isUsable;
+    }
+
+    public static void resetList() {
+        offhandSlots = new ArrayList<>();
     }
 }

@@ -2,14 +2,14 @@ package com.Morticia.armorplus.item;
 
 import net.minecraft.item.Item;
 
-public class testItem extends Item implements PlayerStats {
-    public testItem(Settings settings) {
+public class testGloves extends Item implements PlayerStats {
+    public testGloves(Settings settings) {
         super(settings);
     }
 
     @Override
     public GearType getType() {
-        return GearType.CAWL;
+        return GearType.GLOVES;
     }
 
     @Override

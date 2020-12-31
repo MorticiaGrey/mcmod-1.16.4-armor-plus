@@ -3,8 +3,6 @@ package com.Morticia.armorplus.item;
 // Originally written by Morticia
 
 public interface PlayerStats {
-    // THIS IS FOR ITEMS
-
     // For determining if the item is stat enabled
     boolean isStatEnabled = true;
     // Type of item
@@ -13,4 +11,13 @@ public interface PlayerStats {
     int getStaminaIncrease();
     int getHealthIncrease();
     int getManaIncrease();
+
+    interface Backpack extends PlayerStats {
+        int getTier();
+
+        default GearType getType() {
+            return GearType.BACKPACK;
+        }
+    }
 }
+

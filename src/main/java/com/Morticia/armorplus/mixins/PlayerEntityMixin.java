@@ -31,7 +31,7 @@ public class PlayerEntityMixin {
         } else if (slot == EquipmentSlot.OFFHAND) {
             return (ItemStack)this.inventory.offHand.get(OffhandSlot.activeSlot);
         } else {
-            return slot.getType() == EquipmentSlot.Type.ARMOR ? (ItemStack)this.inventory.armor.get(slot.getEntitySlotId()) : ItemStack.EMPTY;
+            return ItemStack.EMPTY;//slot.getType() == EquipmentSlot.Type.ARMOR ? (ItemStack)this.inventory.armor.get(slot.getEntitySlotId()) : ItemStack.EMPTY;
         }
     }
 }
