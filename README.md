@@ -2,4 +2,4 @@
 
 ## Description
 
-Adds additional armor layer to minecraft
+Adds additional gear types to minecraft
